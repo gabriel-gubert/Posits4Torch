@@ -1,0 +1,6 @@
+[submodule "deep-pensieve"]
+	path = deep-pensieve
+	url = git@github.com:gabriel-gubert/deep-pensieve.git
+[submodule "SoftPosit-Python"]
+	path = SoftPosit-Python
+	url = git@gitlab.com:gvkg97/SoftPosit-Python.git
