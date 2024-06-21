@@ -47,35 +47,51 @@ def main(N = 8, Es = 2, device = 'cpu', fpga_host = '127.0.0.1', fpga_port = 808
 
     model.eval()
 
-    quantized_model = quantize(model, N, Es, nocast = True, device = device, fpga_host = fpga_host, fpga_port = fpga_port, fpga_conf = fpga_conf, max_workers = 4)
+    quantized_model_cpu = quantize(model, N, Es)
 
-    input = torch.rand([1, 64, 200, 112]) * 0.01
+    if device == 'fpga':
+        quantized_model_fpga = quantize(model, N, Es, nocast = True, device = device, fpga_host = fpga_host, fpga_port = fpga_port, fpga_conf = fpga_conf, max_workers = 4)
+
+    input = torch.rand([1, 64, 16, 9]) * 0.01
     qinput = astype(input, qconfig.weight().dtype)
 
     if device == 'fpga':
-        qinput = tobin(qinput)
+        bqinput = tobin(qinput)
 
     now = time.time()
     output = model(input)
     float_model_inference_time = time.time() - now
 
     now = time.time()
-    qoutput = quantized_model(qinput)
-    quantized_model_inference_time = time.time() - now
-
-    output = astype(output, np.double)
+    qoutput = quantized_model_cpu(qinput)
+    quantized_model_cpu_inference_time = time.time() - now
 
     if device == 'fpga':
-        qoutput = frombin(qoutput, qconfig.weight().dtype)
+        now = time.time()
+        bqoutput = quantized_model_fpga(bqinput)
+        quantized_model_fpga_inference_time = time.time() - now
 
+    output = astype(output, np.double)
     qoutput = astype(qoutput, np.double)
 
-    err = np.sqrt(np.mean((qoutput - output)**2)) / np.sqrt(np.mean(output**2)) * 100
+    if device == 'fpga':
+        bqoutput = astype(frombin(bqoutput, qconfig.weight().dtype), np.double)
 
-    print(f'Inference Err.: {err}%')
+    err_cpu = np.sqrt(np.mean((qoutput - output)**2)) / np.sqrt(np.mean(output**2)) * 100
+
+    if device == 'fpga':
+        err_fpga = np.sqrt(np.mean((bqoutput - output)**2)) / np.sqrt(np.mean(output**2)) * 100
+
+    print(f'Inference Err. on CPU: {err_cpu}%')
+
+    if device == 'fpga':
+        print(f'Inference Err. on FPGA: {err_fpga}%')
 
     print(f'float_model_inference_time: {float_model_inference_time}')
-    print(f'quantized_model_inference_time: {quantized_model_inference_time}')
+    print(f'quantized_model_cpu_inference_time: {quantized_model_cpu_inference_time}')
+
+    if device == 'fpga':
+        print(f'quantized_model_fpga_inference_time: {quantized_model_fpga_inference_time}')
 
 if __name__ == '__main__':
     parser = ArgumentParser()
