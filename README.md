@@ -1,1 +1,1 @@
-# PQTorch
+# Posits4Torch
