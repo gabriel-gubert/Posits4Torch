@@ -1,18 +1,18 @@
 from setuptools import setup
 
 setup(
-        name = 'PQTorch',
+        name = 'Posits4Torch',
         version = '1.0.0',
         description = '',
         long_description = '',
         long_description_content_type = 'text',
         author = 'Gubert, G. V. K.',
-        author_email = 'Gabriel.KlaumannGubert@carissma.eu',
+        author_email = 'gvkg97@gmail.com',
         maintainer = 'Gubert, G. V. K.',
-        maintainer_email = 'Gabriel.KlaumannGubert@carissma.eu',
+        maintainer_email = 'gvkg97@gmail.com',
         url = '',
         download_url = '',
-        packages = ['PQTorch'],
+        packages = ['Posits4Torch'],
         package_dir = {'': 'src'},
         license = 'Apache License 2.0',
         zip_safe = True
