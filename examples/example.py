@@ -12,11 +12,11 @@ import torch.nn as nn
 
 import time
 
-import PQTorch.Configurations as Configurations
+import Posits4Torch.Configurations as Configurations
 
-from PQTorch.Quantization import quantize
+from Posits4Torch.Quantization import quantize
 
-from PQTorch.Utilities import gettype, astype, tobin, frombin
+from Posits4Torch.Utilities import gettype, astype, tobin, frombin
 
 def init_weight_bias(model):
     for name, module in model.named_children():
