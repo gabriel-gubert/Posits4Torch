@@ -87,6 +87,7 @@ print(f'Total Inference Time: {inference_time} s')
 | 5  | 2  |
 | 6  | 2  |
 | 7  | 2  |
+| 8  | 0  |
 | 8  | 2  |
 | 9  | 2  |
 | 10 | 2  |
@@ -95,6 +96,7 @@ print(f'Total Inference Time: {inference_time} s')
 | 13 | 2  |
 | 14 | 2  |
 | 15 | 2  |
+| 16 | 1  |
 | 16 | 2  |
 | 17 | 2  |
 | 18 | 2  |
@@ -111,3 +113,4 @@ print(f'Total Inference Time: {inference_time} s')
 | 29 | 2  |
 | 30 | 2  |
 | 31 | 2  |
+| 32 | 2  |
