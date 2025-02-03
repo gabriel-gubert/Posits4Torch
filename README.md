@@ -33,7 +33,7 @@ for name, module in model.named_children():
 
 model.eval()
 ```
-2. Configure the Posit quantization. Should the model be run on the Field-Programmable Gate Array (FPGA), one must define the Posit precision (N), exponent bit-length (Es), the device which to deploy the accelerator (Part), number of rows (R) and columns (C) in the 2D Posit MAC Unit Array, its quire size (QSize), and the corresponding depth of the First-In First-Out (FIFO) buffers. Currently supported configurations for the Posit quantization are described in [Table 1](table-1-supported-posit-quantization-configurations), and in [Table 2](table-2-supported-hardware-accelerator-configurations) for the hardware accelerator.
+2. Configure the Posit quantization. Should the model be run on the Field-Programmable Gate Array (FPGA), one must define the Posit precision (N), exponent bit-length (Es), the device which to deploy the accelerator (Part), number of rows (R) and columns (C) in the 2D Posit MAC Unit Array, its quire size (QSize), and the corresponding depth of the First-In First-Out (FIFO) buffers. Currently supported configurations for the Posit quantization are described in [Table 1](#table-1-supported-posit-quantization-configurations), and in [Table 2](#table-2-supported-hardware-accelerator-configurations) for the hardware accelerator.
 ```
 N = 8           # Posit Precision
 Es = 2          # Exponent Bit-length
