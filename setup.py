@@ -15,5 +15,9 @@ setup(
         packages = ['Posits4Torch'],
         package_dir = {'': 'src'},
         license = 'Apache License 2.0',
-        zip_safe = True
+        zip_safe = True,
+        install_requires = [
+            'numpy',
+            'torch'
+        ]
 )
